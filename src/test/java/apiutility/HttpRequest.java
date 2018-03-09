@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -167,5 +168,79 @@ public class HttpRequest {
             }
         }
         return result;
+    }
+
+
+    /**
+     * 请求WEBAPI并返回结果
+     *
+     * @param url      URL地址，http/https格式，不能含?和参数
+     * @param paraList 参数，以keyvalue列表的方式，key表示参数名，value为参数值，value不要urlencode编码
+     * @param method   POST/GET
+     * @return 返回结果，如果发生异常则直接向外抛出
+     */
+    public  static   String SendRequest(String url, Map<String, String> paraList, String method) throws Exception {
+        String strResult = "";
+        if (url == null || url == "") {
+            return null;
+        }
+        if (method == null) {
+            method = "GET";
+        }
+
+        // GET方式
+        if (method.toUpperCase() == "GET") {
+
+            String fullUrl = url + "?";
+            if (paraList != null) {
+                for (String key : paraList.keySet()) {
+                    fullUrl += key + "=" + URLEncoder.encode(paraList.get(key), "UTF-8") + "&";
+                }
+                fullUrl = fullUrl.substring(0, fullUrl.lastIndexOf("&"));
+            }
+
+            URL realUrl = new URL(fullUrl);
+            URLConnection connection = realUrl.openConnection();
+            connection.connect();
+
+            String line;
+            BufferedReader sr = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+            while ((line = sr.readLine()) != null) {
+                strResult += line;
+            }
+            sr.close();
+        }
+
+        // POST方式
+        if (method.toUpperCase() == "POST") {
+            String fullUrl = url + "?";
+
+
+            URL realUrl = new URL(fullUrl);
+            URLConnection connection = realUrl.openConnection();
+            connection.setRequestProperty("ContentType", "application/x-www-form-urlencoded");
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+
+            PrintWriter out = new PrintWriter(connection.getOutputStream());
+            String paraString = "";
+            if (paraList != null) {
+                for (String key : paraList.keySet()) {
+                    paraString += key + "=" + URLEncoder.encode(paraList.get(key), "UTF-8") + "&";
+                }
+                paraString = paraString.substring(0, paraString.lastIndexOf("&"));
+            }
+            out.print(paraString);
+            out.flush();
+            String line;
+            BufferedReader sr = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+            while ((line = sr.readLine()) != null) {
+                strResult += line;
+            }
+            sr.close();
+        }
+
+        return strResult;
+
     }
 }
