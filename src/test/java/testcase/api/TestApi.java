@@ -36,7 +36,9 @@ public class TestApi {
 
         ApiRequestData apirequestdata  = new ApiRequestData();
         apirequestdata.SetTestApiApiUrl("/user/m/login");
-        apirequestdata.SetBizData(String.format("userName=%s&password=%s", "15882002098", "123456a"));
+        apirequestdata.SetBizData(FileOpHelper.Read("BVLoginData")
+                .replace("#userName#","15882002098")
+                .replace("#password#","123456a"));
         apirequestdata.SetRequestType(RequestType.Post);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type",HttpClient.CONTENT_TYPE_FORM_URL);
