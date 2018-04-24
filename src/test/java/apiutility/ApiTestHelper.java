@@ -12,23 +12,23 @@ public class ApiTestHelper{
     // 测试用例名称
     public static String TestCaseName = null;
     //从配置中获取测试环境hosts
-    static  String  ApiHost = PropertiesUtil.getValue("TestConfig.properties","EvnHostQA");
+    private static  String  ApiHost = PropertiesUtil.getValue("TestConfig.properties","EvnHost");
     //请求数据
     public  static  ApiRequestData ApiRequestData = null;
     //测试日志系统写入信息
-    static TestCaseTestLogInfo TestCaseTestLogInfo = new TestCaseTestLogInfo();
+    private static TestCaseTestLogInfo TestCaseTestLogInfo = new TestCaseTestLogInfo();
     // 是否记录日志到日志系统
-    static String IsToLogSystem = PropertiesUtil.getValue("TestConfig.properties","IsToLogSystem");
+    private static String IsToLogSystem = PropertiesUtil.getValue("TestConfig.properties","IsToLogSystem");
     // 被测系统编号
-    static String TestSystemSysNo = PropertiesUtil.getValue("TestConfig.properties","TestSystemSysNo");
+    private static String TestSystemSysNo = PropertiesUtil.getValue("TestConfig.properties","TestSystemSysNo");
     // 测试版本号
-    static String TestVersionNo = PropertiesUtil.getValue("TestConfig.properties","TestVersionNo");
+    private static String TestVersionNo = PropertiesUtil.getValue("TestConfig.properties","TestVersionNo");
     // 测试日志系统host
-    static String TestLogSystemHost = PropertiesUtil.getValue("TestConfig.properties","TestLogSystemHost");
+    private static String TestLogSystemHost = PropertiesUtil.getValue("TestConfig.properties","TestLogSystemHost");
     // 被测项目名称
-    static String TestProjectName = PropertiesUtil.getValue("TestConfig.properties","TestProjectName");
+    private static String TestProjectName = PropertiesUtil.getValue("TestConfig.properties","TestProjectName");
     // 测试日志详情叠加器
-    static StringBuilder stringbuilder = null;
+    private static StringBuilder stringbuilder = null;
 
     /// <summary>
     /// 执行API测试
@@ -44,9 +44,9 @@ public class ApiTestHelper{
         {
             //1.请求业务得到测试结果
             if(ApiRequestData.GetRequestType() == RequestType.Post){
-                TestResult = ApiTset4Post(ApiRequestData.GetTestApiApiUrl(),ApiRequestData.GetBizData());
+                TestResult = ApiTest4Post(ApiRequestData.GetTestApiApiUrl(),ApiRequestData.GetBizData());
             }else if(ApiRequestData.GetRequestType() == RequestType.Get){
-                TestResult = ApiTset4Get( ApiRequestData.GetTestApiApiUrl());
+                TestResult = ApiTest4Get( ApiRequestData.GetTestApiApiUrl());
             }
             BuildTestCaseTestLogDetail(String.format("%s%n测试结果:[{%s}].%n", CommonTool.GetCurrentTime(), TestResult));
         }
@@ -61,7 +61,7 @@ public class ApiTestHelper{
     /// 发起HTTP请求
     /// </summary>
     /// <returns></returns>
-    static String ApiTset4Post(String TestApiApiUrl,String requestdata) {
+    private static String ApiTest4Post(String TestApiApiUrl,String requestdata) {
         BuildTestCaseTestLogDetail(String.format("%s%n测试数据:[{%s},{%s}].\r\n", CommonTool.GetCurrentTime(), TestApiApiUrl, requestdata));
         return HttpClient.Post(String.format("%s/%s", ApiHost, TestApiApiUrl),ApiRequestData.GetHeaders(), requestdata);
     }
@@ -70,7 +70,7 @@ public class ApiTestHelper{
     /// 发起HTTP请求
     /// </summary>
     /// <returns></returns>
-    static String ApiTset4Get(String TestApiApiUrl) {
+    private static String ApiTest4Get(String TestApiApiUrl) {
         BuildTestCaseTestLogDetail(String.format("%s%n测试数据:[{%s}].\r\n", CommonTool.GetCurrentTime(), TestApiApiUrl));
         return HttpClient.Get(String.format("%s/%s", ApiHost, TestApiApiUrl),ApiRequestData.GetHeaders());
     }
@@ -104,7 +104,7 @@ public class ApiTestHelper{
         {
             if (IswritelogtoLogSystem)
             {
-                BuildTestCaseTestLogDetail(String.format("%s%n测试不通过,Failed,%n失败详情：[{1}]", CommonTool.GetCurrentTime(), TestResultDetail));
+                BuildTestCaseTestLogDetail(String.format("%s%n测试不通过,Failed,%n失败详情：[{%s}]", CommonTool.GetCurrentTime(), TestResultDetail));
                 TestCaseTestLogInfo.SetTestEndTime(new Date());
                 TestCaseTestLogInfo.SetTestStatus(0);
                 //调用写入日志系统
@@ -119,7 +119,7 @@ public class ApiTestHelper{
     /// </summary>
     /// <param name="ProjectName">被测项目名称</param>
     /// <returns></returns>
-    static String WriteLogToLogSystem() {
+    private static String WriteLogToLogSystem() {
         //记录测试日志到测试日志系统Precheck
         ToLogSystemPrecheck();
         //调用异步Post请求写入日志系统
@@ -127,7 +127,7 @@ public class ApiTestHelper{
         Headers.put("Content-Type",HttpClient.CONTENT_TYPE_JSON_URL);
         //获取测试日志系统账号&密码配置
         String TestSystemAppId_Key = PropertiesUtil.getValue("TestConfig.properties","TestSystemAppId");
-        if (TestSystemAppId_Key ==null || TestSystemAppId_Key =="")
+        if (CommonTool.IsNullOrEmpty(TestSystemAppId_Key))
         {
             CommonTool.ThrowNewException("请在测试配置文件中配置TestSystemAppId&Key");
         }
@@ -158,7 +158,7 @@ public class ApiTestHelper{
     /// <summary>
     /// 写入日志系统前检查
     /// </summary>
-    static void ToLogSystemPrecheck() {
+    private static void ToLogSystemPrecheck() {
         if (CommonTool.IsNullOrEmpty(TestLogSystemHost)){
             CommonTool.ThrowNewException("请在测试配置文件中配置TestLogSystemHost");
         }
@@ -185,7 +185,7 @@ public class ApiTestHelper{
     /// 将测试详情追加写入到日志详情
     /// </summary>
     /// <param name="steptestlog"></param>
-    static void BuildTestCaseTestLogDetail(String steptestlog) {
+    private static void BuildTestCaseTestLogDetail(String steptestlog) {
         TestCaseTestLogInfo.SetLogDetail(stringbuilder.append(steptestlog).toString());
     }
 }

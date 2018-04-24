@@ -19,9 +19,11 @@ public class CommonTool {
     }
 
     //抛出业务异常
-    public  static void ThrowNewException(String ExceptionMsg){
+    public static void ThrowNewException(String ExceptionMsg){
         try {
             throw new Exception(ExceptionMsg);
-        }catch (Exception e) {e.printStackTrace();}
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -19,7 +19,9 @@ public class PropertiesUtil {
                 //装载配置文件
                 prop.load(new FileReader(ConfFilePath));
                 resultvalue = prop.getProperty(key);
-
+                if(CommonTool.IsNullOrEmpty(resultvalue)){
+                    CommonTool.ThrowNewException(String.format("请在配置文件中配置->%s!",key));
+                }
                 //设置缓存
                 CacheTool.SetCache(key,resultvalue);
             }

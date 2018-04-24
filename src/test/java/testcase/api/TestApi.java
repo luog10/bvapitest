@@ -7,38 +7,19 @@ import java.util.Map;
 
 public class TestApi {
     @Test
-    /*
-     *   测试不带参数的Get http请求
-     */
-    public void TestGetRequestForNoParameterRequest(){
+    public void TestGetRequestForNoParameterRequest() {
         //发送 GET 请求
         String TestUrl = "http://10.21.10.179:9000/";
         String s1 = HttpClient.Get(TestUrl);
         Assert.assertTrue(s1.contains("九九"));
     }
+
     @Test
-    /*
-     *   测试不带参数的Get http请求
-     */
     public void TestAsyncGetRequestForNoParameterRequest(){
         //发送 GET 请求
         String TestUrl = "http://10.21.10.179:9000/";
         String s1 = HttpClient.AsyncGet(TestUrl);
         Assert.assertTrue(s1.contains("九九"));
-    }
-    @Test
-    /*
-     *   测试Post请求
-     */
-    public void TestAsyncPostRequestForBVLogin(){
-        //发送 GET 请求
-        String BvpreLoginUrl = "http://192.168.60.60/v1/api/user/m/login";
-        String usrinfo = String.format("userName=%s&password=%s", "18888888889", "123456");
-        Map<String, String> Headers = new HashMap<String, String>();
-        Headers.put("Content-Type",HttpClient.CONTENT_TYPE_FORM_URL);
-        String s1 = HttpClient.Post(BvpreLoginUrl,Headers,usrinfo);
-        Assert.assertTrue(s1.contains("true"));
-        Assert.assertTrue(s1.contains("18888888889"));
     }
 
     @Test
@@ -49,24 +30,6 @@ public class TestApi {
     }
 
     @Test
-    /*
-     *   测试Post请求
-     */
-    public void TestPostRequestForBVLogin(){
-        //发送 GET 请求
-        String BvpreLoginUrl = "http://192.168.60.60/v1/api/user/m/login";
-        String usrinfo = String.format("userName=%s&password=%s", "18888888889", "123456");
-        Map<String, String> Headers = new HashMap<String, String>();
-        Headers.put("Content-Type",HttpClient.CONTENT_TYPE_FORM_URL);
-        String s1 = HttpClient.Post(BvpreLoginUrl,Headers,usrinfo);
-        Assert.assertTrue(s1.contains("true"));
-        Assert.assertTrue(s1.contains("18888888889"));
-    }
-
-    @Test
-    /*
-     *   测试Post请求
-     */
     public void TestPostRequestForBVLogin_01(){
         ApiTestHelper.TestFunctionName = this.getClass().getName();
         ApiTestHelper.TestCaseName = Thread.currentThread() .getStackTrace()[1].getMethodName();
@@ -85,7 +48,7 @@ public class TestApi {
         //4.断言测试结果
         try {
             Assert.assertTrue(s1.contains("true"));
-            Assert.assertTrue(s1.contains("15882002099"));
+            Assert.assertTrue(s1.contains("15882002098"));
             ApiTestHelper.RecordTestResult(TestResultType.Pass, "测试通过");
         }
         catch (Exception ex)
@@ -107,6 +70,7 @@ public class TestApi {
         headers.put("Content-Type",HttpClient.CONTENT_TYPE_FORM_URL);
         apirequestdata.SetHeaders(headers);
         ApiTestHelper.ApiRequestData=apirequestdata;
+
         String loginfo = ApiTestHelper.ExcuteApiTset();
 
         //4.断言测试结果
@@ -136,17 +100,5 @@ public class TestApi {
         {
             ApiTestHelper.RecordTestResult(TestResultType.Failed, ex.getMessage());
         }
-    }
-
-    @Test
-    public void TestPostRequestForBVLoginToSetHeader(){
-        //发送 GET 请求
-        String BvpreLoginUrl = "http://192.168.60.60/v1/api/user/m/login";
-        String usrinfo = String.format("userName=%s&password=%s", "18888888889", "123456");
-        Map<String, String> Headers = new HashMap<String, String>();
-        Headers.put("Content-Type","application/x-www-form-urlencoded");
-        String s1 = HttpClient.Post(BvpreLoginUrl,Headers,usrinfo);
-        Assert.assertTrue(s1.contains("true"));
-        Assert.assertTrue(s1.contains("18888888889"));
     }
 }

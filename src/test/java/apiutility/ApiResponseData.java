@@ -1,6 +1,5 @@
 package apiutility;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.http.Header;
 
 /**
@@ -8,11 +7,11 @@ import org.apache.http.Header;
  * */
 public class ApiResponseData {
     //请求成功标志
-    private Bool success;
-    public void  Setsuccess(Bool success ){
+    private boolean success;
+    public void  Setsuccess(boolean success ){
         this.success = success;
     }
-    public Bool  Getsuccess(){
+    public boolean  Getsuccess(){
         return  this.success;
     }
     //提示消息
