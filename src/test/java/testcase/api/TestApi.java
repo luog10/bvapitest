@@ -31,22 +31,26 @@ public class TestApi {
 
     @Test
     public void TestPostRequestForBVLogin_01(){
+        //1.获取测试模块名称、测试用例名称
         ApiTestHelper.TestFunctionName = this.getClass().getName();
         ApiTestHelper.TestCaseName = Thread.currentThread() .getStackTrace()[1].getMethodName();
-
+        //2.设置测试数据
         ApiRequestData apirequestdata  = new ApiRequestData();
+        //2.1 测试接口地址或方法名称
         apirequestdata.SetTestApiApiUrl("/user/m/login");
+        //2.2 测试业务数据
         apirequestdata.SetBizData(FileOpHelper.Read("BVLoginData")
                 .replace("#userName#","15882002098")
                 .replace("#password#","123456a"));
+        //2.3 测试请求方式
         apirequestdata.SetRequestType(RequestType.Post);
+        //2.4 测试请求头
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type",HttpClient.CONTENT_TYPE_FORM_URL);
         apirequestdata.SetHeaders(headers);
         ApiTestHelper.ApiRequestData=apirequestdata;
-
+        //3.执行接口测试
         String s1 = ApiTestHelper.ExcuteApiTset();
-
         //4.断言测试结果
         try {
             Assert.assertTrue(s1.contains("true"));
