@@ -3,8 +3,8 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="bvapitest">
         <classes>
-            <class name="TestApi"></class>
-            <class name="TestDemo"></class>
+            <class name="TestCase.User.TestUserMgr"></class>
+            <class name="TestCase.Demo.TestDemo"></class>
         </classes>
     </test>
 </suite>

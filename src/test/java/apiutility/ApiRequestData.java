@@ -1,6 +1,7 @@
-package apiutility;
+package ApiUtility;
 
-import javax.print.attribute.standard.RequestingUserName;
+import com.test.utility.RequestType;
+
 import java.util.Map;
 
 /**
@@ -24,7 +25,7 @@ public class ApiRequestData {
         return this.BizData;
     }
     //请求类型
-    private  RequestType RequestType;
+    private RequestType RequestType;
     public void  SetRequestType(RequestType RequestType){
         this.RequestType = RequestType;
     }

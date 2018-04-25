@@ -1,11 +1,14 @@
-package apiutility;
+package ApiUtility;
+
+import com.test.utility.*;
+import org.testng.Reporter;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 /**
  * Api测试帮助类
- * */
+        * */
 public class ApiTestHelper{
     // 测试模块名称
     public static String TestFunctionName = null;
@@ -186,6 +189,11 @@ public class ApiTestHelper{
     /// </summary>
     /// <param name="steptestlog"></param>
     private static void BuildTestCaseTestLogDetail(String steptestlog) {
+        //1.TestNG 打印日志
+        Reporter.log(steptestlog);
+        //2.控制控制台打印日志
+        System.out.println(steptestlog);
+        //3.构建测试日志系统日志
         TestCaseTestLogInfo.SetLogDetail(stringbuilder.append(steptestlog).toString());
     }
 }
