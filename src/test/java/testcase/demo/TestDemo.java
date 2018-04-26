@@ -15,10 +15,12 @@ public class TestDemo {
         }
         Assert.assertEquals(1,1);
     }
+
     @Test
     public void testcase2(){
         Assert.assertEquals(1,1);
     }
+
     @Test
     public void TestGetRequestForNoParameterRequest() {
         //发送 GET 请求

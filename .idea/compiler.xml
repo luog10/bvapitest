@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="bvapitest" />
+        <module name="BVApiTest" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="BVApiTest" target="1.5" />
       <module name="bvapitest" target="1.5" />
     </bytecodeTargetLevel>
   </component>

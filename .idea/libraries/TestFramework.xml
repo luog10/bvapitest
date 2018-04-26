@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="TestFramework">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/.idea/libraries/TestFramework.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

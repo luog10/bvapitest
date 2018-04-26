@@ -13,6 +13,13 @@
         <artifactId>testng</artifactId>
         <version>6.8</version>
     </dependency>
+    <dependency>
+        <groupId>TestUitity</groupId>
+        <artifactId>TestFramework</artifactId>
+        <version>1.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/libs/TestFramework.jar</systemPath>
+    </dependency>
 </dependencies>
 
 <build>
