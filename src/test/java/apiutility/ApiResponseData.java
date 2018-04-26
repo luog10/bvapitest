@@ -1,4 +1,4 @@
-package apiutility;
+package ApiUtility;
 
 import org.apache.http.Header;
 

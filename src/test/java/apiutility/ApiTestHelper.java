@@ -55,7 +55,7 @@ public class ApiTestHelper{
         }
         catch (Exception ex)
         {
-            RecordTestResult(TestResultType.Failed, ex.getMessage());
+            TestResult = ex.getMessage();
         }
         return TestResult;
     }
