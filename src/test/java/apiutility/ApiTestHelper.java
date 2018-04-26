@@ -41,7 +41,7 @@ public class ApiTestHelper{
         //初始化测试日志详情叠加器
         stringbuilder = new StringBuilder();
         TestCaseTestLogInfo.SetTestBeginTime(new Date());
-        BuildTestCaseTestLogDetail(String.format("%s%n测试开始...%n",CommonTool.GetCurrentTime()));
+        BuildTestCaseTestLogDetail(String.format("%s%n测试开始...%n",CommonTool.GetCurrentTimeMs()));
         String TestResult = "";
         try
         {
@@ -51,7 +51,7 @@ public class ApiTestHelper{
             }else if(ApiRequestData.GetRequestType() == RequestType.Get){
                 TestResult = ApiTest4Get( ApiRequestData.GetTestApiApiUrl());
             }
-            BuildTestCaseTestLogDetail(String.format("%s%n测试结果:[{%s}].%n", CommonTool.GetCurrentTime(), TestResult));
+            BuildTestCaseTestLogDetail(String.format("%s%n测试结果:[{%s}].%n", CommonTool.GetCurrentTimeMs(), TestResult));
         }
         catch (Exception ex)
         {
@@ -65,7 +65,7 @@ public class ApiTestHelper{
     /// </summary>
     /// <returns></returns>
     private static String ApiTest4Post(String TestApiApiUrl,String requestdata) {
-        BuildTestCaseTestLogDetail(String.format("%s%n测试数据:[{%s},{%s}].\r\n", CommonTool.GetCurrentTime(), TestApiApiUrl, requestdata));
+        BuildTestCaseTestLogDetail(String.format("%s%n测试数据:[{%s},{%s}].\r\n", CommonTool.GetCurrentTimeMs(), TestApiApiUrl, requestdata));
         return HttpClient.Post(String.format("%s/%s", ApiHost, TestApiApiUrl),ApiRequestData.GetHeaders(), requestdata);
     }
 
@@ -74,7 +74,7 @@ public class ApiTestHelper{
     /// </summary>
     /// <returns></returns>
     private static String ApiTest4Get(String TestApiApiUrl) {
-        BuildTestCaseTestLogDetail(String.format("%s%n测试数据:[{%s}].\r\n", CommonTool.GetCurrentTime(), TestApiApiUrl));
+        BuildTestCaseTestLogDetail(String.format("%s%n测试数据:[{%s}].\r\n", CommonTool.GetCurrentTimeMs(), TestApiApiUrl));
         return HttpClient.Get(String.format("%s/%s", ApiHost, TestApiApiUrl),ApiRequestData.GetHeaders());
     }
 
@@ -96,7 +96,7 @@ public class ApiTestHelper{
         {
             if (IswritelogtoLogSystem)
             {
-                BuildTestCaseTestLogDetail(String.format("%s%n测试通过,Pass..", CommonTool.GetCurrentTime()));
+                BuildTestCaseTestLogDetail(String.format("%s%n测试通过,Pass..", CommonTool.GetCurrentTimeMs()));
                 TestCaseTestLogInfo.SetTestStatus(1);
                 TestCaseTestLogInfo.SetTestEndTime(new Date());
                 //调用写入日志系统
@@ -107,7 +107,7 @@ public class ApiTestHelper{
         {
             if (IswritelogtoLogSystem)
             {
-                BuildTestCaseTestLogDetail(String.format("%s%n测试不通过,Failed,%n失败详情：[{%s}]", CommonTool.GetCurrentTime(), TestResultDetail));
+                BuildTestCaseTestLogDetail(String.format("%s%n测试不通过,Failed,%n失败详情：[{%s}]", CommonTool.GetCurrentTimeMs(), TestResultDetail));
                 TestCaseTestLogInfo.SetTestEndTime(new Date());
                 TestCaseTestLogInfo.SetTestStatus(0);
                 //调用写入日志系统

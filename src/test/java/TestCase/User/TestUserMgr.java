@@ -20,7 +20,7 @@ public class TestUserMgr {
         //2.1 测试接口地址或方法名称
         apirequestdata.SetTestApiApiUrl("/user/m/login");
         //2.2 测试业务数据
-        apirequestdata.SetBizData(FileOpHelper.Read("\\User\\BVLoginData")
+        apirequestdata.SetBizData(FileOpHelper.Read("/User/BVLoginData")
                 .replace("#userName#","15882002098")
                 .replace("#password#","123456a"));
         //2.3 测试请求方式
