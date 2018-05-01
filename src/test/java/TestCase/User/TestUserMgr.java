@@ -35,11 +35,10 @@ public class TestUserMgr {
         //4.断言测试结果
         try {
             Assert.assertTrue(s1.contains("true"));
-            Assert.assertTrue(s1.contains("15882002098"));
+            Assert.assertTrue(s1.contains("15882002099"));
             ApiTestHelper.RecordTestResult(TestResultType.Pass, "测试通过");
         }
-        catch (Exception ex)
-        {
+        catch (AssertionError ex) {
             ApiTestHelper.RecordTestResult(TestResultType.Failed, ex.getMessage());
         }
     }
@@ -65,7 +64,7 @@ public class TestUserMgr {
             Assert.assertTrue(loginfo.contains("true"));
             Assert.assertTrue(loginfo.contains("15882002098"));
         }
-        catch (Exception ex) {
+        catch (AssertionError ex) {
             ApiTestHelper.RecordTestResult(TestResultType.Failed, ex.getMessage());
         }
 
@@ -83,7 +82,7 @@ public class TestUserMgr {
             Assert.assertTrue(info.contains("true"));
             ApiTestHelper.RecordTestResult(TestResultType.Pass, "测试通过");
         }
-        catch (Exception ex)
+        catch (AssertionError ex)
         {
             ApiTestHelper.RecordTestResult(TestResultType.Failed, ex.getMessage());
         }
