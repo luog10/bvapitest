@@ -40,6 +40,7 @@ public class TestUserMgr {
         }
         catch (AssertionError ex) {
             ApiTestHelper.RecordTestResult(TestResultType.Failed, ex.getMessage());
+            Assert.fail();
         }
     }
 
@@ -66,6 +67,7 @@ public class TestUserMgr {
         }
         catch (AssertionError ex) {
             ApiTestHelper.RecordTestResult(TestResultType.Failed, ex.getMessage());
+            Assert.fail();
         }
 
         //测试获取用户基本信息
@@ -82,9 +84,9 @@ public class TestUserMgr {
             Assert.assertTrue(info.contains("true"));
             ApiTestHelper.RecordTestResult(TestResultType.Pass, "测试通过");
         }
-        catch (AssertionError ex)
-        {
+        catch (AssertionError ex) {
             ApiTestHelper.RecordTestResult(TestResultType.Failed, ex.getMessage());
+            Assert.fail();
         }
     }
 }
