@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="bvapitest">
+<suite name="紫荆谷项目网关接口测试">
+    <test name="Demo">
         <classes>
-            <class name="TestCase.User.TestUserMgr"></class>
-            <class name="TestCase.Demo.TestDemo"></class>
+            <class name="TestCase.Demo.TestDemo">
+                <methods>
+                    <exclude name=""></exclude>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="用户相关接口测试">
+        <classes>
+            <class name="TestCase.User.TestUserMgr">
+                <methods>
+                    <exclude name=""></exclude>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
