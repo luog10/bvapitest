@@ -24,7 +24,7 @@ public class TestDemo {
     @Test
     public void TestGetRequestForNoParameterRequest() {
         //发送 GET 请求
-        String TestUrl = "http://10.21.10.179:9000/";
+        String TestUrl = "http://10.21.10.182:9000";
         String s1 = HttpClient.Get(TestUrl);
         Assert.assertTrue(s1.contains("九九"));
     }
@@ -32,7 +32,7 @@ public class TestDemo {
     @Test
     public void TestAsyncGetRequestForNoParameterRequest(){
         //发送 GET 请求
-        String TestUrl = "http://10.21.10.179:9000/";
+        String TestUrl = "http://10.21.10.182:9000";
         String s1 = HttpClient.AsyncGet(TestUrl);
         Assert.assertTrue(s1.contains("九九"));
     }

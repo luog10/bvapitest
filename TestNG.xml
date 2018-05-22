@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="紫荆谷项目网关接口测试">
-    <test name="Demo">
+    <!--<test name="Demo">-->
+        <!--<classes>-->
+            <!--<class name="TestCase.Demo.TestDemo">-->
+                <!--<methods>-->
+                    <!--<exclude name=""></exclude>-->
+                <!--</methods>-->
+            <!--</class>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <test name="UserLoin-用户登录">
         <classes>
-            <class name="TestCase.Demo.TestDemo">
+            <class name="TestCase.User.UserLogin.TestUserLogin">
                 <methods>
                     <exclude name=""></exclude>
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="用户相关接口测试">
+    <test name="UserInfoMgr-用户账号中心信息管理">
         <classes>
-            <class name="TestCase.User.TestUserMgr">
+            <class name="TestCase.User.UserInfoMgr.TestUserInfoMgr">
                 <methods>
                     <exclude name=""></exclude>
                 </methods>
